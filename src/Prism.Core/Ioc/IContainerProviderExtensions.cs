@@ -25,7 +25,7 @@ namespace Prism.Ioc
         /// <param name="provider">The current <see cref="IContainerProvider"/></param>
         /// <param name="parameters">Typed parameters to use when resolving the Service</param>
         /// <returns>The resolved Service <see cref="Type"/></returns>
-        public static T Resolve<T>(this IContainerProvider provider, params (Type Type, object Instance)[] parameters)
+        public static T Resolve<T>(this IContainerProvider provider, params System.Collections.Generic.KeyValuePair<Type, object>[] parameters)
         {
             return (T)provider.Resolve(typeof(T), parameters);
         }
@@ -38,7 +38,7 @@ namespace Prism.Ioc
         /// <param name="name">The service name/key used when registering the <see cref="Type"/></param>
         /// <param name="parameters">Typed parameters to use when resolving the Service</param>
         /// <returns>The resolved Service <see cref="Type"/></returns>
-        public static T Resolve<T>(this IContainerProvider provider, string name, params (Type Type, object Instance)[] parameters)
+        public static T Resolve<T>(this IContainerProvider provider, string name, params System.Collections.Generic.KeyValuePair<Type, object>[] parameters)
         {
             return (T)provider.Resolve(typeof(T), name, parameters);
         }

@@ -2,10 +2,10 @@
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
-    <TargetFrameworks>net461;net47;netcoreapp3.1;net5.0-windows</TargetFrameworks>
+    <TargetFrameworks>net452</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <RootNamespace>Prism.Unity</RootNamespace>
-    <PackageId>Prism.Unity</PackageId>
+    <PackageId>Net452.Prism.Unity</PackageId>
     <!--<Summary>Unity extensions for Prism.</Summary>-->
     <Description>Use these extensions to build Prism applications based on Unity.</Description>
     <PackageTags>prism;unity;mvvm;wpf;xaml</PackageTags>

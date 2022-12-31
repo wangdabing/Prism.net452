@@ -269,7 +269,7 @@ namespace Prism.DryIoc
         /// <param name="type">The service <see cref="Type"/></param>
         /// <returns>The resolved Service <see cref="Type"/></returns>
         public object Resolve(Type type) =>
-            Resolve(type, Array.Empty<(Type, object)>());
+            Resolve(type, new System.Collections.Generic.KeyValuePair<Type, object>[0]);
 
         /// <summary>
         /// Resolves a given <see cref="Type"/>
@@ -278,7 +278,7 @@ namespace Prism.DryIoc
         /// <param name="name">The service name/key used when registering the <see cref="Type"/></param>
         /// <returns>The resolved Service <see cref="Type"/></returns>
         public object Resolve(Type type, string name) =>
-            Resolve(type, name, Array.Empty<(Type, object)>());
+            Resolve(type, name, new System.Collections.Generic.KeyValuePair<Type, object>[0]);
 
         /// <summary>
         /// Resolves a given <see cref="Type"/>
@@ -286,12 +286,12 @@ namespace Prism.DryIoc
         /// <param name="type">The service <see cref="Type"/></param>
         /// <param name="parameters">Typed parameters to use when resolving the Service</param>
         /// <returns>The resolved Service <see cref="Type"/></returns>
-        public object Resolve(Type type, params (Type Type, object Instance)[] parameters)
+        public object Resolve(Type type, params System.Collections.Generic.KeyValuePair<Type, object>[] parameters)
         {
             try
             {
                 var container = _currentScope?.Resolver ?? Instance;
-                return container.Resolve(type, args: parameters.Select(p => p.Instance).ToArray());
+                return container.Resolve(type, args: parameters.Select(p => p.Value).ToArray());
             }
             catch (Exception ex)
             {
@@ -306,12 +306,12 @@ namespace Prism.DryIoc
         /// <param name="name">The service name/key used when registering the <see cref="Type"/></param>
         /// <param name="parameters">Typed parameters to use when resolving the Service</param>
         /// <returns>The resolved Service <see cref="Type"/></returns>
-        public object Resolve(Type type, string name, params (Type Type, object Instance)[] parameters)
+        public object Resolve(Type type, string name, params System.Collections.Generic.KeyValuePair<Type, object>[] parameters)
         {
             try
             {
                 var container = _currentScope?.Resolver ?? Instance;
-                return container.Resolve(type, name, args: parameters.Select(p => p.Instance).ToArray());
+                return container.Resolve(type, name, args: parameters.Select(p => p.Value).ToArray());
             }
             catch (Exception ex)
             {
@@ -396,16 +396,16 @@ namespace Prism.DryIoc
             }
 
             public object Resolve(Type type) =>
-                Resolve(type, Array.Empty<(Type, object)>());
+                Resolve(type, new System.Collections.Generic.KeyValuePair<Type, object>[0]);
 
             public object Resolve(Type type, string name) =>
-                Resolve(type, name, Array.Empty<(Type, object)>());
+                Resolve(type, name, new System.Collections.Generic.KeyValuePair<Type, object>[0]);
 
-            public object Resolve(Type type, params (Type Type, object Instance)[] parameters)
+            public object Resolve(Type type, params System.Collections.Generic.KeyValuePair<Type, object>[] parameters)
             {
                 try
                 {
-                    return Resolver.Resolve(type, args: parameters.Select(p => p.Instance).ToArray());
+                    return Resolver.Resolve(type, args: parameters.Select(p => p.Value).ToArray());
                 }
                 catch (Exception ex)
                 {
@@ -413,11 +413,11 @@ namespace Prism.DryIoc
                 }
             }
 
-            public object Resolve(Type type, string name, params (Type Type, object Instance)[] parameters)
+            public object Resolve(Type type, string name, params System.Collections.Generic.KeyValuePair<Type, object>[] parameters)
             {
                 try
                 {
-                    return Resolver.Resolve(type, name, args: parameters.Select(p => p.Instance).ToArray());
+                    return Resolver.Resolve(type, name, args: parameters.Select(p => p.Value).ToArray());
                 }
                 catch (Exception ex)
                 {

@@ -167,7 +167,7 @@ namespace Prism.Regions
                 var matchingType = _container.GetRegistrationType(candidateNavigationContract);
                 if (matchingType is null)
                 {
-                    return Array.Empty<object>();
+                    return new object[0];
                 }
 
                 return GetCandidatesFromRegionViews(region, matchingType.FullName);

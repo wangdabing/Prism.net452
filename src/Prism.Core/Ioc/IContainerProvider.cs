@@ -20,7 +20,7 @@ namespace Prism.Ioc
         /// <param name="type">The service <see cref="Type"/></param>
         /// <param name="parameters">Typed parameters to use when resolving the Service</param>
         /// <returns>The resolved Service <see cref="Type"/></returns>
-        object Resolve(Type type, params (Type Type, object Instance)[] parameters);
+        object Resolve(Type type, params System.Collections.Generic.KeyValuePair<Type, object>[] parameters);
 
         /// <summary>
         /// Resolves a given <see cref="Type"/>
@@ -37,7 +37,7 @@ namespace Prism.Ioc
         /// <param name="name">The service name/key used when registering the <see cref="Type"/></param>
         /// <param name="parameters">Typed parameters to use when resolving the Service</param>
         /// <returns>The resolved Service <see cref="Type"/></returns>
-        object Resolve(Type type, string name, params (Type Type, object Instance)[] parameters);
+        object Resolve(Type type, string name, params System.Collections.Generic.KeyValuePair<Type, object>[] parameters);
 
         /// <summary>
         /// Creates a new scope

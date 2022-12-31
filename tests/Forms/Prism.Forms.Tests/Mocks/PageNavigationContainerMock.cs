@@ -102,12 +102,12 @@ namespace Prism.Forms.Tests.Mocks
             throw new NotImplementedException();
         }
 
-        public object Resolve(Type type, params (Type Type, object Instance)[] parameters)
+        public object Resolve(Type type, params System.Collections.Generic.KeyValuePair<Type, object>[] parameters)
         {
             throw new NotImplementedException();
         }
 
-        public object Resolve(Type type, string name, params (Type Type, object Instance)[] parameters)
+        public object Resolve(Type type, string name, params System.Collections.Generic.KeyValuePair<Type, object>[] parameters)
         {
             throw new NotImplementedException();
         }

@@ -123,7 +123,7 @@ namespace Prism.Forms.Tests.Services.Mocks.Ioc
             return _container.GetRegistration(type).Create();
         }
 
-        public object Resolve(Type type, params (Type Type, object Instance)[] parameters)
+        public object Resolve(Type type, params System.Collections.Generic.KeyValuePair<Type, object>[] parameters)
         {
             throw new NotImplementedException();
         }
@@ -133,7 +133,7 @@ namespace Prism.Forms.Tests.Services.Mocks.Ioc
             return _container.GetRegistration(type, name).Create();
         }
 
-        public object Resolve(Type type, string name, params (Type Type, object Instance)[] parameters)
+        public object Resolve(Type type, string name, params System.Collections.Generic.KeyValuePair<Type, object>[] parameters)
         {
             throw new NotImplementedException();
         }

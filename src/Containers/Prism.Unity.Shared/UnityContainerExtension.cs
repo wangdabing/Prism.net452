@@ -267,7 +267,7 @@ namespace Prism.Unity
         /// <param name="type">The service <see cref="Type"/></param>
         /// <returns>The resolved Service <see cref="Type"/></returns>
         public object Resolve(Type type) =>
-            Resolve(type, Array.Empty<(Type, object)>());
+            Resolve(type, new System.Collections.Generic.KeyValuePair<Type, object>[0]);
 
         /// <summary>
         /// Resolves a given <see cref="Type"/>
@@ -276,7 +276,7 @@ namespace Prism.Unity
         /// <param name="name">The service name/key used when registering the <see cref="Type"/></param>
         /// <returns>The resolved Service <see cref="Type"/></returns>
         public object Resolve(Type type, string name) =>
-            Resolve(type, name, Array.Empty<(Type, object)>());
+            Resolve(type, name, new System.Collections.Generic.KeyValuePair<Type, object>[0]);
 
         /// <summary>
         /// Resolves a given <see cref="Type"/>
@@ -284,12 +284,12 @@ namespace Prism.Unity
         /// <param name="type">The service <see cref="Type"/></param>
         /// <param name="parameters">Typed parameters to use when resolving the Service</param>
         /// <returns>The resolved Service <see cref="Type"/></returns>
-        public object Resolve(Type type, params (Type Type, object Instance)[] parameters)
+        public object Resolve(Type type, params System.Collections.Generic.KeyValuePair<Type, object>[] parameters)
         {
             try
             {
                 var c = _currentScope?.Container ?? Instance;
-                var overrides = parameters.Select(p => new DependencyOverride(p.Type, p.Instance)).ToArray();
+                var overrides = parameters.Select(p => new DependencyOverride(p.Key, p.Value)).ToArray();
 
                 if (typeof(IEnumerable).IsAssignableFrom(type) && type.GetGenericArguments().Length > 0)
                 {
@@ -312,7 +312,7 @@ namespace Prism.Unity
         /// <param name="name">The service name/key used when registering the <see cref="Type"/></param>
         /// <param name="parameters">Typed parameters to use when resolving the Service</param>
         /// <returns>The resolved Service <see cref="Type"/></returns>
-        public object Resolve(Type type, string name, params (Type Type, object Instance)[] parameters)
+        public object Resolve(Type type, string name, params System.Collections.Generic.KeyValuePair<Type, object>[] parameters)
         {
             try
             {
@@ -322,7 +322,7 @@ namespace Prism.Unity
                 if (!c.IsRegistered(type, name))
                     throw new KeyNotFoundException($"No registered type {type.Name} with the key {name}.");
 
-                var overrides = parameters.Select(p => new DependencyOverride(p.Type, p.Instance)).ToArray();
+                var overrides = parameters.Select(p => new DependencyOverride(p.Key, p.Value)).ToArray();
                 return c.Resolve(type, name, overrides);
             }
             catch (Exception ex)
@@ -410,16 +410,16 @@ namespace Prism.Unity
             }
 
             public object Resolve(Type type) =>
-                Resolve(type, Array.Empty<(Type, object)>());
+                Resolve(type, new System.Collections.Generic.KeyValuePair<Type, object>[0]);
 
             public object Resolve(Type type, string name) =>
-                Resolve(type, name, Array.Empty<(Type, object)>());
+                Resolve(type, name, new System.Collections.Generic.KeyValuePair<Type, object>[0]);
 
-            public object Resolve(Type type, params (Type Type, object Instance)[] parameters)
+            public object Resolve(Type type, params System.Collections.Generic.KeyValuePair<Type, object>[] parameters)
             {
                 try
                 {
-                    var overrides = parameters.Select(p => new DependencyOverride(p.Type, p.Instance)).ToArray();
+                    var overrides = parameters.Select(p => new DependencyOverride(p.Key, p.Value)).ToArray();
                     return Container.Resolve(type, overrides);
                 }
                 catch (Exception ex)
@@ -428,7 +428,7 @@ namespace Prism.Unity
                 }
             }
 
-            public object Resolve(Type type, string name, params (Type Type, object Instance)[] parameters)
+            public object Resolve(Type type, string name, params System.Collections.Generic.KeyValuePair<Type, object>[] parameters)
             {
                 try
                 {
@@ -436,7 +436,7 @@ namespace Prism.Unity
                     if (!Container.IsRegistered(type, name))
                         throw new KeyNotFoundException($"No registered type {type.Name} with the key {name}.");
 
-                    var overrides = parameters.Select(p => new DependencyOverride(p.Type, p.Instance)).ToArray();
+                    var overrides = parameters.Select(p => new DependencyOverride(p.Key, p.Value)).ToArray();
                     return Container.Resolve(type, name, overrides);
                 }
                 catch (Exception ex)
